@@ -22,7 +22,7 @@ export class LayoutComponent implements OnInit  {
     this.getFilesLists();
   }
 
-  createFile(): void {
+  public createFile(): void {
     this.httpService.post('createFile', this.createFileName).subscribe((data: any) => {
         this.notification = 'Файл с наименованием ' + data + ' создан'
     });
@@ -30,7 +30,7 @@ export class LayoutComponent implements OnInit  {
     this.clearNotification();
   }
 
-  deleteFile(): void {
+  public deleteFile(): void {
     this.httpService.post('deleteFile', this.deleteFileName).subscribe((data: any) => {
       this.notification = 'Файл с наименованием ' + data + ' удален';
     });
@@ -38,7 +38,7 @@ export class LayoutComponent implements OnInit  {
     this.clearNotification();
   }
 
-  readOnlyFile(): void {
+  public readOnlyFile(): void {
     this.httpService.post('readFile', this.readOnlyFileName).subscribe((data: any) => {
       this.readOnlyFileNameContent = data.content;
       this.notification = 'Файл с наименованием ' + data.fileName + ' открыт для чтения';
@@ -47,7 +47,7 @@ export class LayoutComponent implements OnInit  {
     this.clearNotification();
   }
 
-  readFile(): void {
+  public readFile(): void {
     this.httpService.post('readFile', this.readFileName).subscribe((data: any) => {
       this.updateFileNameContent = data.content;
       this.notification = 'Файл с наименованием ' + data.fileName + ' открыт для чтения и редактирования';
@@ -56,7 +56,7 @@ export class LayoutComponent implements OnInit  {
     this.clearNotification();
   }
 
-  updateFile(): void {
+  public updateFile(): void {
     this.httpService.post('updateFile', this.readFileName, this.updateFileNameContent).subscribe((data: any) => {
       this.updateFileNameContent = data.content;
       this.notification = 'Файл с наименованием ' + data.fileName + ' сохранен';
@@ -65,13 +65,13 @@ export class LayoutComponent implements OnInit  {
     this.clearNotification();
   }
 
-  getFilesLists() : void {
+  private getFilesLists() : void {
     this.httpService.get('getAllFiles').subscribe((data: any) => {
       this.filesList = data
     });
   }
 
-  clearNotification() {
+  private clearNotification() {
     setTimeout(() => {
       this.notification = ''
     }, 3000);

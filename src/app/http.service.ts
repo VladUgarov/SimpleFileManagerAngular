@@ -14,18 +14,21 @@ export class HttpService {
   }
 
   post(url: string, fileName: string, fileContent: string = ''): Observable<any> {
-    if(url === 'createFile') {
-      return this.http.post(BASE_API_URL + url, { fileName });
+    switch (url){
+      case 'createFile':
+        return this.http.post(BASE_API_URL + url, { fileName });
+        break
+      case 'deleteFile':
+        return this.http.post(BASE_API_URL + url, { fileName });
+        break
+      case 'readFile':
+        return this.http.post(BASE_API_URL + url, { fileName });
+        break
+      case 'updateFile':
+        return this.http.post(BASE_API_URL + url, { fileName, fileContent });
+        break
+      default:
+        return throwError('Ошибка в запросе');
+      }
     }
-    else if(url === 'deleteFile') {
-      return this.http.post(BASE_API_URL + url, { fileName });
-    }
-    else if(url === 'readFile') {
-      return this.http.post(BASE_API_URL + url, { fileName });
-    }
-    else if(url === 'updateFile') {
-      return this.http.post(BASE_API_URL + url, { fileName, fileContent });
-    }
-    return throwError('Ошибка в запросе');
-  }
 }
