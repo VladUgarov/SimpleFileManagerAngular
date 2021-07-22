@@ -2,9 +2,10 @@
   <div class="header">
     <h1>Simple File Manager</h1>
     <pre>
-        <div id="serverResponse">Список файлов: {{response}}</div>
+        <div id="serverResponse">Список файлов: {{filesList}}</div>
     </pre>
   </div>
+  <div class="notification">{{notification}}</div>
   <div class="body">
     <mat-grid-list cols="2" rowHeight="6:2">
       <mat-grid-tile>
@@ -12,9 +13,9 @@
           <h2>Create file</h2>
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Введите название файла</mat-label>
-            <input matInput placeholder="" value="">
+            <input matInput type="text" placeholder="" name='createFileName' [(ngModel)]="createFileName">
           </mat-form-field>
-          <button mat-flat-button>Создать файл</button>
+          <button mat-flat-button (click)="createFile()">Создать файл</button>
         </form>
       </mat-grid-tile>
       <mat-grid-tile>
@@ -22,9 +23,9 @@
           <h2>Delete file</h2>
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Введите название файла</mat-label>
-            <input matInput placeholder="" value="">
+            <input matInput type="text" placeholder="" name='deleteFileName' [(ngModel)]="deleteFileName">
           </mat-form-field>
-          <button mat-flat-button>Удалить файл</button>
+          <button mat-flat-button (click)="deleteFile()">Удалить файл</button>
         </form>
       </mat-grid-tile>
       <mat-grid-tile>
@@ -32,13 +33,13 @@
           <h2>Read file</h2>
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Введите название файла</mat-label>
-            <input matInput placeholder="" value="">
+            <input matInput type="text" placeholder="" name='readOnlyFileName' [(ngModel)]="readOnlyFileName">
           </mat-form-field>
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label></mat-label>
-            <textarea matInput disabled placeholder=""></textarea>
+            <textarea matInput disabled placeholder="" [value]="readOnlyFileNameContent"></textarea>
           </mat-form-field>
-          <button mat-flat-button>Прочитать файл</button>
+          <button mat-flat-button (click)="readOnlyFile()">Прочитать файл</button>
         </form>
       </mat-grid-tile>
       <mat-grid-tile>
@@ -46,14 +47,14 @@
           <h2>Update file</h2>
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Введите название файла</mat-label>
-            <input matInput placeholder="" value="">
+            <input matInput type="text" placeholder="" name='readFileName' [(ngModel)]="readFileName">
           </mat-form-field>
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label></mat-label>
-            <textarea matInput placeholder=""></textarea>
+            <textarea matInput placeholder="" name='updateFileNameContent' [(ngModel)]="updateFileNameContent"></textarea>
           </mat-form-field>
-          <button class="buttonReadFile" mat-flat-button>Прочитать файл</button>
-          <button mat-flat-button>Обновить файл</button>
+          <button class="buttonReadFile" mat-flat-button (click)="readFile()">Прочитать файл</button>
+          <button mat-flat-button (click)="updateFile()">Обновить файл</button>
         </form>
       </mat-grid-tile>
     </mat-grid-list>
