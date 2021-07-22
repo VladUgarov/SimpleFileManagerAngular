@@ -1,0 +1,64 @@
+<div>
+  <div class="header">
+    <h1>Simple File Manager</h1>
+    <pre>
+        <div id="serverResponse">Список файлов: {{response}}</div>
+    </pre>
+  </div>
+  <div class="body">
+    <mat-grid-list cols="2" rowHeight="6:2">
+      <mat-grid-tile>
+        <form class="example-form">
+          <h2>Create file</h2>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Введите название файла</mat-label>
+            <input matInput placeholder="" value="">
+          </mat-form-field>
+          <button mat-flat-button>Создать файл</button>
+        </form>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <form class="example-form">
+          <h2>Delete file</h2>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Введите название файла</mat-label>
+            <input matInput placeholder="" value="">
+          </mat-form-field>
+          <button mat-flat-button>Удалить файл</button>
+        </form>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <form class="example-form">
+          <h2>Read file</h2>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Введите название файла</mat-label>
+            <input matInput placeholder="" value="">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label></mat-label>
+            <textarea matInput disabled placeholder=""></textarea>
+          </mat-form-field>
+          <button mat-flat-button>Прочитать файл</button>
+        </form>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <form class="example-form">
+          <h2>Update file</h2>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Введите название файла</mat-label>
+            <input matInput placeholder="" value="">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label></mat-label>
+            <textarea matInput placeholder=""></textarea>
+          </mat-form-field>
+          <button class="buttonReadFile" mat-flat-button>Прочитать файл</button>
+          <button mat-flat-button>Обновить файл</button>
+        </form>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <div class="footer">
+      by Vladislav Ugarov
+  </div>
+</div>

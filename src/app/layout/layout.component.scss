@@ -1,0 +1,43 @@
+.header{
+  background-color: black;
+  text-align: center;
+  padding: 10px 0 10px 0;
+  h1{
+    color: white;
+  }
+  pre{
+    color: white;
+  }
+}
+
+.body{
+  text-align: center;
+
+  mat-grid-list{
+    background: black;
+  }
+  mat-grid-tile {
+    background: whitesmoke;
+  }
+  .buttonReadFile{
+    margin-right: 20px;
+  }
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  .example-full-width {
+    width: 100%;
+  }
+}
+.footer{
+  background-color: black;
+  width: 100%;
+  height: 30px;
+  color: white;
+  padding-top: 17px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
