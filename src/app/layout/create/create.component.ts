@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output} from '@angular/core';
-import { HttpService } from "../../services/http.service";
-import {FileService} from "../../services/file.service";
+import { HttpService } from '../../services/http.service';
+import { FileService } from '../../services/file.service';
 
 @Component({
   selector: 'app-create',
@@ -18,7 +18,7 @@ export class CreateComponent {
   }
 
   constructor(private httpService: HttpService,
-              private fileService: FileService){}
+              private fileService: FileService) {}
 
   public createFile(): void {
     this.httpService.post('createFile', this.createFileName).subscribe((data: any) => {

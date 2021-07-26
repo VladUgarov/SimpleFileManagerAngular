@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-layout',
@@ -16,7 +16,7 @@ export class LayoutComponent {
 
   private clearNotification() {
     setTimeout(() => {
-      this.notification = ''
+      this.notification = '';
     }, 3000);
   }
 }

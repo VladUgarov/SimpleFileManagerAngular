@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output} from '@angular/core';
-import { HttpService } from "../../services/http.service"
+import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'app-read',
@@ -13,7 +13,7 @@ export class ReadComponent {
   public readOnlyFileName: string = '';
   public readOnlyFileNameContent: string = '';
 
-  constructor(private httpService: HttpService){}
+  constructor(private httpService: HttpService) {}
 
   public readOnlyFile(): void {
     this.httpService.post('readFile', this.readOnlyFileName).subscribe((data: any) => {

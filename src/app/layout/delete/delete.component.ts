@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import {HttpService} from "../../services/http.service";
-import {FileService} from "../../services/file.service";
+import { Component, EventEmitter, Output } from '@angular/core';
+import { HttpService } from '../../services/http.service';
+import { FileService } from '../../services/file.service';
 
 @Component({
   selector: 'app-delete',
@@ -18,7 +18,7 @@ export class DeleteComponent {
   }
 
   constructor(private httpService: HttpService,
-              private fileService: FileService){}
+              private fileService: FileService) {}
 
   public deleteFile(): void {
     this.httpService.post('deleteFile', this.deleteFileName).subscribe((data: any) => {
