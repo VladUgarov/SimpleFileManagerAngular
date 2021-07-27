@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { HttpService } from "./http.service";
 
 const GET_ALL_FILES = 'getAllFiles';
@@ -9,7 +9,7 @@ const GET_ALL_FILES = 'getAllFiles';
 })
 export class FileService {
 
-  public filesList: string = '';
+  public filesList$: BehaviorSubject<string> = new BehaviorSubject('');
 
   constructor(private httpService: HttpService) {}
 

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {NotificationService} from "../services/notification.service";
 
 @Component({
   selector: 'app-layout',
@@ -7,16 +8,8 @@ import { Component } from '@angular/core';
 })
 export class LayoutComponent {
 
-  public notification: string = '';
+  public notification$ = this.notificationService.notification$
 
-  public notificationEvent(data: string): void {
-    this.notification = data;
-    this.clearNotification();
-  }
+  constructor(private notificationService: NotificationService) {}
 
-  private clearNotification() {
-    setTimeout(() => {
-      this.notification = '';
-    }, 3000);
-  }
 }

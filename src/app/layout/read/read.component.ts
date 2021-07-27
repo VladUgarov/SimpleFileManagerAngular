@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output} from '@angular/core';
 import { HttpService } from '../../services/http.service';
+import {NotificationService} from "../../services/notification.service";
 
 @Component({
   selector: 'app-read',
@@ -8,17 +9,17 @@ import { HttpService } from '../../services/http.service';
 })
 export class ReadComponent {
 
-  @Output() notification = new EventEmitter<string>();
-
   public readOnlyFileName: string = '';
   public readOnlyFileNameContent: string = '';
 
-  constructor(private httpService: HttpService) {}
+  constructor(private httpService: HttpService,
+              private notificationService: NotificationService) {}
 
   public readOnlyFile(): void {
     this.httpService.post('readFile', this.readOnlyFileName).subscribe((data: any) => {
       this.readOnlyFileNameContent = data.content;
-      this.notification.emit('Файл с наименованием ' + data.fileName + ' открыт для чтения');
+      this.notificationService.notification$.next('Файл с наименованием ' + data.fileName + ' открыт для чтения');
+      this.notificationService.clearNotification();
     });
   }
 }

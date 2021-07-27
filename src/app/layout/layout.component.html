@@ -1,26 +1,26 @@
 <div>
   <app-all-files></app-all-files>
-  <div class="notification">{{notification}}</div>
+  <div class="notification">{{notification$ | async}}</div>
   <div class="body">
     <mat-grid-list cols="2" rowHeight="6:2">
       <mat-grid-tile>
         <form class="example-form">
-          <app-create (notification)="notificationEvent($event)"></app-create>
+          <app-create></app-create>
         </form>
       </mat-grid-tile>
       <mat-grid-tile>
         <form class="example-form">
-          <app-delete (notification)="notificationEvent($event)"></app-delete>
+          <app-delete></app-delete>
         </form>
       </mat-grid-tile>
       <mat-grid-tile>
         <form class="example-form">
-          <app-read (notification)="notificationEvent($event)"></app-read>
+          <app-read></app-read>
         </form>
       </mat-grid-tile>
       <mat-grid-tile>
         <form class="example-form">
-          <app-update (notification)="notificationEvent($event)"></app-update>
+          <app-update></app-update>
         </form>
       </mat-grid-tile>
     </mat-grid-list>

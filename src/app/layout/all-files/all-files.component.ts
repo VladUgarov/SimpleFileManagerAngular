@@ -8,19 +8,13 @@ import { FileService } from '../../services/file.service';
 })
 export class AllFilesComponent implements OnInit {
 
-  get fileList(): string {
-    return this.fileService.filesList;
-  }
-
-  set changeFileList(list: string) {
-    this.fileService.filesList = list;
-  }
+  public list$ = this.fileService.filesList$
 
   constructor(private fileService: FileService) {}
 
   ngOnInit(): void {
     this.fileService.getFilesLists().subscribe((data: any) => {
-      this.changeFileList = data;
+      this.fileService.filesList$.next(data);
     });
   }
 
