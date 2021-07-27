@@ -1,0 +1,6 @@
+<h2>Delete file</h2>
+<mat-form-field class="example-full-width" appearance="fill">
+  <mat-label>Введите название файла</mat-label>
+  <input matInput type="text" placeholder="" name='deleteFileName' [(ngModel)]="deleteFileName">
+</mat-form-field>
+<button mat-flat-button (click)="deleteFile()">Удалить файл</button>

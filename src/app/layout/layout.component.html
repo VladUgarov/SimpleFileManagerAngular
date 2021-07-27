@@ -1,65 +1,31 @@
 <div>
-  <div class="header">
-    <h1>Simple File Manager</h1>
-    <pre>
-        <div id="serverResponse">Список файлов: {{filesList}}</div>
-    </pre>
-  </div>
+  <app-all-files></app-all-files>
   <div class="notification">{{notification}}</div>
   <div class="body">
     <mat-grid-list cols="2" rowHeight="6:2">
       <mat-grid-tile>
         <form class="example-form">
-          <h2>Create file</h2>
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Введите название файла</mat-label>
-            <input matInput type="text" placeholder="" name='createFileName' [(ngModel)]="createFileName">
-          </mat-form-field>
-          <button mat-flat-button (click)="createFile()">Создать файл</button>
+          <app-create (notification)="notificationEvent($event)"></app-create>
         </form>
       </mat-grid-tile>
       <mat-grid-tile>
         <form class="example-form">
-          <h2>Delete file</h2>
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Введите название файла</mat-label>
-            <input matInput type="text" placeholder="" name='deleteFileName' [(ngModel)]="deleteFileName">
-          </mat-form-field>
-          <button mat-flat-button (click)="deleteFile()">Удалить файл</button>
+          <app-delete (notification)="notificationEvent($event)"></app-delete>
         </form>
       </mat-grid-tile>
       <mat-grid-tile>
         <form class="example-form">
-          <h2>Read file</h2>
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Введите название файла</mat-label>
-            <input matInput type="text" placeholder="" name='readOnlyFileName' [(ngModel)]="readOnlyFileName">
-          </mat-form-field>
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label></mat-label>
-            <textarea matInput disabled placeholder="" [value]="readOnlyFileNameContent"></textarea>
-          </mat-form-field>
-          <button mat-flat-button (click)="readOnlyFile()">Прочитать файл</button>
+          <app-read (notification)="notificationEvent($event)"></app-read>
         </form>
       </mat-grid-tile>
       <mat-grid-tile>
         <form class="example-form">
-          <h2>Update file</h2>
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Введите название файла</mat-label>
-            <input matInput type="text" placeholder="" name='readFileName' [(ngModel)]="readFileName">
-          </mat-form-field>
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label></mat-label>
-            <textarea matInput placeholder="" name='updateFileNameContent' [(ngModel)]="updateFileNameContent"></textarea>
-          </mat-form-field>
-          <button class="buttonReadFile" mat-flat-button (click)="readFile()">Прочитать файл</button>
-          <button mat-flat-button (click)="updateFile()">Обновить файл</button>
+          <app-update (notification)="notificationEvent($event)"></app-update>
         </form>
       </mat-grid-tile>
     </mat-grid-list>
   </div>
   <div class="footer">
-      by Vladislav Ugarov
+    by Vladislav Ugarov
   </div>
 </div>
