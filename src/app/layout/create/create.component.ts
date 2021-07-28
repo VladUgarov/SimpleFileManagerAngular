@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Output} from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { FileService } from '../../services/file.service';
 import {NotificationService} from "../../services/notification.service";
@@ -6,7 +6,8 @@ import {NotificationService} from "../../services/notification.service";
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
-  styleUrls: ['./create.component.scss']
+  styleUrls: ['./create.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateComponent {
 

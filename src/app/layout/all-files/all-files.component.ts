@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FileService } from '../../services/file.service';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {FileService} from '../../services/file.service';
 
 @Component({
   selector: 'app-all-files',
   templateUrl: './all-files.component.html',
-  styleUrls: ['./all-files.component.scss']
+  styleUrls: ['./all-files.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AllFilesComponent implements OnInit {
 
