@@ -1,6 +1,7 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
 import {HttpService} from '../../services/http.service';
 import {NotificationService} from "../../services/notification.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-update',
@@ -8,10 +9,12 @@ import {NotificationService} from "../../services/notification.service";
   styleUrls: ['./update.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UpdateComponent {
+export class UpdateComponent implements OnDestroy {
 
   public readFileName: string = '';
   public updateFileNameContent: string = '';
+
+  subscriptions: Subscription[] = [];
 
   constructor(private httpService: HttpService,
               private notificationService: NotificationService,
@@ -19,20 +22,26 @@ export class UpdateComponent {
   }
 
   public readFile(): void {
+    this.subscriptions.push(
     this.httpService.post('readFile', this.readFileName).subscribe((data: any) => {
       this.updateFileNameContent = data.content;
       this.changeDetector.detectChanges();
       this.notificationService.notification$.next('Файл с наименованием ' + data.fileName + ' открыт для чтения и редактирования');
       this.notificationService.clearNotification();
-    });
+    }));
   }
 
   public updateFile(): void {
+    this.subscriptions.push(
     this.httpService.post('updateFile', this.readFileName, this.updateFileNameContent).subscribe((data: any) => {
       this.updateFileNameContent = data.content;
       this.notificationService.notification$.next('Файл с наименованием ' + data.fileName + ' сохранен');
       this.notificationService.clearNotification();
-    });
+    }));
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
 }
