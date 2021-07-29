@@ -14,7 +14,7 @@ export class UpdateComponent implements OnDestroy {
   public readFileName: string = '';
   public updateFileNameContent: string = '';
 
-  subscriptions: Subscription[] = [];
+  private subscriptions: Subscription[] = [];
 
   constructor(private httpService: HttpService,
               private notificationService: NotificationService,

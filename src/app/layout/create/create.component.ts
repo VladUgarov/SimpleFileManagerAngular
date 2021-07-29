@@ -14,7 +14,7 @@ export class CreateComponent implements OnDestroy{
 
   public createFileName: string = '';
 
-  subscriptions: Subscription[] = [];
+  private subscriptions: Subscription[] = [];
 
   set fileList(list: string) {
     this.fileService.filesList$.next(list);

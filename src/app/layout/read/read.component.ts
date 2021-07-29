@@ -14,7 +14,7 @@ export class ReadComponent implements OnDestroy{
   public readOnlyFileName: string = '';
   public readOnlyFileNameContent: string = '';
 
-  subscriptions: Subscription[] = [];
+  private subscriptions: Subscription[] = [];
 
   constructor(private httpService: HttpService,
               private notificationService: NotificationService,

@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { FileService } from '../../services/file.service';
 import {NotificationService} from "../../services/notification.service";
@@ -14,7 +14,7 @@ export class DeleteComponent implements OnDestroy {
 
   public deleteFileName: string = '';
 
-  subscriptions: Subscription[] = [];
+  private subscriptions: Subscription[] = [];
 
   set fileList(list: string) {
     this.fileService.filesList$.next(list);
@@ -22,7 +22,8 @@ export class DeleteComponent implements OnDestroy {
 
   constructor(private httpService: HttpService,
               private fileService: FileService,
-              private notificationService: NotificationService) {}
+              private notificationService: NotificationService,
+              private changeDetector: ChangeDetectorRef) {}
 
   public deleteFile(): void {
     this.subscriptions.push(
@@ -34,6 +35,7 @@ export class DeleteComponent implements OnDestroy {
     this.subscriptions.push(
     this.fileService.getFilesLists().subscribe((data: string) => {
       this.fileService.filesList$.next(data);
+      this.changeDetector.detectChanges();
     }));
   }
 

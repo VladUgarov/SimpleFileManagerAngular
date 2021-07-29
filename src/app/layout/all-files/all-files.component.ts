@@ -12,7 +12,7 @@ export class AllFilesComponent implements OnInit, OnDestroy  {
 
   public list$ = this.fileService.filesList$
 
-  subscriptions: Subscription[] = [];
+  private subscriptions: Subscription[] = [];
 
   constructor(private fileService: FileService) {}
 
