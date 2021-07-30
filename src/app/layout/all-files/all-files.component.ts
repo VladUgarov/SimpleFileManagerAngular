@@ -15,17 +15,17 @@ export class AllFilesComponent implements OnInit, OnDestroy  {
 
   constructor(private fileService: FileService) {}
 
-  private notifier: Subject<any> = new Subject();
+  private destroyStream$: Subject<any> = new Subject();
 
   ngOnInit(): void {
-    this.fileService.getFilesLists().pipe(takeUntil(this.notifier)).subscribe((data: any) => {
+    this.fileService.getFilesLists().pipe(takeUntil(this.destroyStream$)).subscribe((data: any) => {
       this.fileService.filesList$.next(data);
     });
   }
 
   ngOnDestroy() {
-    this.notifier.next();
-    this.notifier.complete();
+    this.destroyStream$.next();
+    this.destroyStream$.complete();
   }
 
 }

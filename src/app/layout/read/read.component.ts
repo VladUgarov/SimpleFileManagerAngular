@@ -15,14 +15,14 @@ export class ReadComponent implements OnDestroy{
   public readOnlyFileName: string = '';
   public readOnlyFileNameContent: string = '';
 
-  private notifier: Subject<any> = new Subject();
+  private destroyStream$: Subject<any> = new Subject();
 
   constructor(private httpService: HttpService,
               private notificationService: NotificationService,
               private changeDetector: ChangeDetectorRef) {}
 
   public readOnlyFile(): void {
-    this.httpService.post('readFile', this.readOnlyFileName).pipe(takeUntil(this.notifier)).subscribe((data: any) => {
+    this.httpService.post('readFile', this.readOnlyFileName).pipe(takeUntil(this.destroyStream$)).subscribe((data: any) => {
       this.readOnlyFileNameContent = data.content;
       this.changeDetector.detectChanges();
       this.notificationService.notification$.next('Файл с наименованием ' + data.fileName + ' открыт для чтения');
@@ -31,7 +31,7 @@ export class ReadComponent implements OnDestroy{
   }
 
   ngOnDestroy() {
-    this.notifier.next();
-    this.notifier.complete();
+    this.destroyStream$.next();
+    this.destroyStream$.complete();
   }
 }

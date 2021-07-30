@@ -15,7 +15,7 @@ export class CreateComponent implements OnDestroy{
 
   public createFileName: string = '';
 
-  private notifier: Subject<any> = new Subject();
+  private destroyStream$: Subject<any> = new Subject();
 
   set fileList(list: string) {
     this.fileService.filesList$.next(list);
@@ -26,19 +26,19 @@ export class CreateComponent implements OnDestroy{
               private notificationService: NotificationService) {}
 
   public createFile(): void {
-    this.httpService.post('createFile', this.createFileName).pipe(takeUntil(this.notifier)).subscribe((data: any) => {
+    this.httpService.post('createFile', this.createFileName).pipe(takeUntil(this.destroyStream$)).subscribe((data: any) => {
       this.notificationService.notification$.next('Файл с наименованием ' + data + ' создан')
       this.notificationService.clearNotification();
     });
 
-    this.fileService.getFilesLists().pipe(takeUntil(this.notifier)).subscribe((data: string) => {
+    this.fileService.getFilesLists().pipe(takeUntil(this.destroyStream$)).subscribe((data: string) => {
       this.fileService.filesList$.next(data);
     });
   }
 
   ngOnDestroy() {
-    this.notifier.next();
-    this.notifier.complete();
+    this.destroyStream$.next();
+    this.destroyStream$.complete();
   }
 
 }
