@@ -13,6 +13,6 @@ export class NotificationService {
   public clearNotification() {
     setTimeout(() => {
       this.notification$.next('');
-    }, 3000);
+    }, 1500);
   }
 }

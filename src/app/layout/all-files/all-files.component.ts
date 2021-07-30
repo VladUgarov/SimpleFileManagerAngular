@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import {FileService} from '../../services/file.service';
-import {Subscription} from "rxjs";
+import {Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
 
 @Component({
   selector: 'app-all-files',
@@ -12,19 +13,19 @@ export class AllFilesComponent implements OnInit, OnDestroy  {
 
   public list$ = this.fileService.filesList$
 
-  private subscriptions: Subscription[] = [];
-
   constructor(private fileService: FileService) {}
 
+  private destroyStream$: Subject<any> = new Subject();
+
   ngOnInit(): void {
-    this.subscriptions.push(
-    this.fileService.getFilesLists().subscribe((data: any) => {
+    this.fileService.getFilesLists().pipe(takeUntil(this.destroyStream$)).subscribe((data: any) => {
       this.fileService.filesList$.next(data);
-    }));
+    });
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  ngOnDestroy() {
+    this.destroyStream$.next();
+    this.destroyStream$.complete();
   }
 
 }

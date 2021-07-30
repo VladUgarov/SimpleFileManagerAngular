@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import {FormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatButtonModule } from '@angular/material/button';
@@ -26,9 +26,9 @@ import { UpdateComponent } from './layout/update/update.component';
     UpdateComponent
   ],
   imports: [
+    BrowserModule,
     FormsModule,
     HttpClientModule,
-    BrowserModule,
     BrowserAnimationsModule,
     MatGridListModule,
     MatButtonModule,
