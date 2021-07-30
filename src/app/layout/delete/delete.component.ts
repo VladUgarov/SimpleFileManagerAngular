@@ -29,6 +29,7 @@ export class DeleteComponent implements OnDestroy {
   public deleteFile(): void {
     this.httpService.post('deleteFile', this.deleteFileName).subscribe((data: any) => {
       this.notificationService.notification$.next('Файл с наименованием ' + data + ' удален');
+      this.changeDetector.detectChanges();
       this.notificationService.clearNotification();
     });
 
