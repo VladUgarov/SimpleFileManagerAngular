@@ -2,7 +2,8 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy} from '
 import { HttpService } from '../../services/http.service';
 import { FileService } from '../../services/file.service';
 import {NotificationService} from "../../services/notification.service";
-import {Subscription} from "rxjs";
+import {Subject, Subscription} from "rxjs";
+import {takeUntil} from "rxjs/operators";
 
 @Component({
   selector: 'app-delete',
@@ -14,7 +15,7 @@ export class DeleteComponent implements OnDestroy {
 
   public deleteFileName: string = '';
 
-  private subscriptions: Subscription[] = [];
+  private notifier: Subject<any> = new Subject();
 
   set fileList(list: string) {
     this.fileService.filesList$.next(list);
@@ -26,21 +27,20 @@ export class DeleteComponent implements OnDestroy {
               private changeDetector: ChangeDetectorRef) {}
 
   public deleteFile(): void {
-    this.subscriptions.push(
     this.httpService.post('deleteFile', this.deleteFileName).subscribe((data: any) => {
       this.notificationService.notification$.next('Файл с наименованием ' + data + ' удален');
       this.notificationService.clearNotification();
-    }));
+    });
 
-    this.subscriptions.push(
-    this.fileService.getFilesLists().subscribe((data: string) => {
+    this.fileService.getFilesLists().pipe(takeUntil(this.notifier)).subscribe((data: string) => {
       this.fileService.filesList$.next(data);
       this.changeDetector.detectChanges();
-    }));
+    });
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    this.notifier.next();
+    this.notifier.complete();
   }
 
 }

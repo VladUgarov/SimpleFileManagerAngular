@@ -2,7 +2,8 @@ import {ChangeDetectionStrategy, Component, OnDestroy} from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { FileService } from '../../services/file.service';
 import {NotificationService} from "../../services/notification.service";
-import {Subscription} from "rxjs";
+import {Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
 
 @Component({
   selector: 'app-create',
@@ -14,7 +15,7 @@ export class CreateComponent implements OnDestroy{
 
   public createFileName: string = '';
 
-  private subscriptions: Subscription[] = [];
+  private notifier: Subject<any> = new Subject();
 
   set fileList(list: string) {
     this.fileService.filesList$.next(list);
@@ -25,20 +26,19 @@ export class CreateComponent implements OnDestroy{
               private notificationService: NotificationService) {}
 
   public createFile(): void {
-    this.subscriptions.push(
-    this.httpService.post('createFile', this.createFileName).subscribe((data: any) => {
+    this.httpService.post('createFile', this.createFileName).pipe(takeUntil(this.notifier)).subscribe((data: any) => {
       this.notificationService.notification$.next('Файл с наименованием ' + data + ' создан')
       this.notificationService.clearNotification();
-    }));
+    });
 
-    this.subscriptions.push(
-    this.fileService.getFilesLists().subscribe((data: string) => {
+    this.fileService.getFilesLists().pipe(takeUntil(this.notifier)).subscribe((data: string) => {
       this.fileService.filesList$.next(data);
-    }));
+    });
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    this.notifier.next();
+    this.notifier.complete();
   }
 
 }
