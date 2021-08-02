@@ -1,31 +1,5 @@
 <div>
-  <app-all-files></app-all-files>
+  <app-header></app-header>
   <div class="notification">{{notification$ | async}}</div>
-  <div class="body">
-    <mat-grid-list cols="2" rowHeight="6:2">
-      <mat-grid-tile>
-        <form class="example-form">
-          <app-create></app-create>
-        </form>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <form class="example-form">
-          <app-delete></app-delete>
-        </form>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <form class="example-form">
-          <app-read></app-read>
-        </form>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <form class="example-form">
-          <app-update></app-update>
-        </form>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </div>
-  <div class="footer">
-    by Vladislav Ugarov
-  </div>
 </div>
+<router-outlet></router-outlet>

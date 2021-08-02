@@ -4,12 +4,12 @@ import {Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
 
 @Component({
-  selector: 'app-all-files',
-  templateUrl: './all-files.component.html',
-  styleUrls: ['./all-files.component.scss'],
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AllFilesComponent implements OnInit, OnDestroy  {
+export class HeaderComponent implements OnInit, OnDestroy  {
 
   public list$ = this.fileService.filesList$
 
