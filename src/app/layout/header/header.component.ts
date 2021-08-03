@@ -2,18 +2,20 @@ import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/co
 import {FileService} from '../../services/file.service';
 import {Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
+import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-all-files',
-  templateUrl: './all-files.component.html',
-  styleUrls: ['./all-files.component.scss'],
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AllFilesComponent implements OnInit, OnDestroy  {
+export class HeaderComponent implements OnInit, OnDestroy  {
 
   public list$ = this.fileService.filesList$
 
-  constructor(private fileService: FileService) {}
+  constructor(private fileService: FileService,
+              private router: Router) {}
 
   private destroyStream$: Subject<any> = new Subject();
 
@@ -28,4 +30,7 @@ export class AllFilesComponent implements OnInit, OnDestroy  {
     this.destroyStream$.complete();
   }
 
+  navigateTo(url:string) {
+    this.router.navigateByUrl(url);
+  }
 }

@@ -1,0 +1,9 @@
+<div class="header">
+  <h1>Simple File Manager</h1>
+    <div class="fileList" id="serverResponse">Список файлов: {{list$ | async}}</div>
+  <button mat-flat-button type="button" (click)="navigateTo('')">Главная</button>
+  <button mat-flat-button type="button" (click)="navigateTo('create')">Создать файл</button>
+  <button mat-flat-button type="button" (click)="navigateTo('delete')">Удалить файл</button>
+  <button mat-flat-button type="button" (click)="navigateTo('read')">Прочитать файл</button>
+  <button mat-flat-button type="button" (click)="navigateTo('update')">Обновить файл</button>
+</div>

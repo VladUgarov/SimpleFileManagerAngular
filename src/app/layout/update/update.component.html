@@ -1,11 +1,17 @@
-<h2>Update file</h2>
-<mat-form-field class="example-full-width" appearance="fill">
-  <mat-label>Введите название файла</mat-label>
-  <input matInput type="text" placeholder="" name='readFileName' [(ngModel)]="readFileName">
-</mat-form-field>
-<mat-form-field class="example-full-width" appearance="fill">
-  <mat-label></mat-label>
-  <textarea matInput placeholder="" name='updateFileNameContent' [(ngModel)]="updateFileNameContent"></textarea>
-</mat-form-field>
-<button class="buttonReadFile" mat-flat-button (click)="readFile()">Прочитать файл</button>
-<button mat-flat-button (click)="updateFile()">Обновить файл</button>
+<div class="container">
+  <h2>Update file</h2>
+  <div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Введите название файла</mat-label>
+      <input matInput type="text" placeholder="" name='readFileName' [(ngModel)]="readFileName">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label></mat-label>
+      <textarea matInput placeholder="" name='updateFileNameContent' [(ngModel)]="updateFileNameContent"></textarea>
+    </mat-form-field>
+  </div>
+  <button mat-raised-button color="warn" (click)="readFile()">Прочитать файл</button>
+  <button mat-raised-button color="warn" (click)="updateFile()">Обновить файл</button>
+</div>
