@@ -1,20 +1,17 @@
-import {ChangeDetectionStrategy, Component, OnDestroy} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { HttpService } from '../../services/http.service';
 import { FileService } from '../../services/file.service';
-import {NotificationService} from "../../services/notification.service";
-import {Subject} from "rxjs";
-import {takeUntil} from "rxjs/operators";
-
-
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateComponent implements OnDestroy{
-
+export class CreateComponent implements OnDestroy {
   public createFileName: string = '';
 
   private destroyStream$: Subject<any> = new Subject();
@@ -24,12 +21,12 @@ export class CreateComponent implements OnDestroy{
   }
 
   constructor(private httpService: HttpService,
-              private fileService: FileService,
-              private notificationService: NotificationService) {}
+    private fileService: FileService,
+    private notificationService: NotificationService) {}
 
   public createFile(): void {
     this.httpService.post('createFile', this.createFileName).pipe(takeUntil(this.destroyStream$)).subscribe((data: any) => {
-      this.notificationService.notification$.next('Файл с наименованием ' + data + ' создан')
+      this.notificationService.notification$.next(`Файл с наименованием ${data} создан`);
       this.notificationService.clearNotification();
     });
 
@@ -42,5 +39,4 @@ export class CreateComponent implements OnDestroy{
     this.destroyStream$.next();
     this.destroyStream$.complete();
   }
-
 }

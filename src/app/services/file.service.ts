@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from "rxjs";
-import { HttpService } from "./http.service";
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpService } from './http.service';
 
 const GET_ALL_FILES = 'getAllFiles';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FileService {
-
   public filesList$: BehaviorSubject<string> = new BehaviorSubject('');
 
   constructor(private httpService: HttpService) {}

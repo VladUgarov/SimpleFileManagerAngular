@@ -2,18 +2,18 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import {LayoutComponent} from "./layout/layout.component";
-import { HttpService } from "./services/http.service";
+import { LayoutComponent } from './layout/layout.component';
+import { HttpService } from './services/http.service';
 import { HeaderComponent } from './layout/header/header.component';
-import {RouterModule, Routes} from "@angular/router";
 
 const appRoutes: Routes = [
-  { path: 'create',  loadChildren: () => import('./layout/create/create.module').then(m => m.CreateModule)},
-  { path: 'delete', loadChildren: () => import('./layout/delete/delete.module').then(m => m.DeleteModule)},
-  { path: 'read', loadChildren: () => import('./layout/read/read.module').then(m => m.ReadModule)},
-  { path: 'update', loadChildren: () => import('./layout/update/update.module').then(m => m.UpdateModule)},
+  { path: 'create', loadChildren: () => import('./layout/create/create.module').then(m => m.CreateModule) },
+  { path: 'delete', loadChildren: () => import('./layout/delete/delete.module').then(m => m.DeleteModule) },
+  { path: 'read', loadChildren: () => import('./layout/read/read.module').then(m => m.ReadModule) },
+  { path: 'update', loadChildren: () => import('./layout/update/update.module').then(m => m.UpdateModule) },
 ];
 
 @NgModule({
@@ -31,6 +31,6 @@ const appRoutes: Routes = [
   ],
   exports: [RouterModule],
   providers: [HttpService],
-  bootstrap: [AppComponent]
-},)
+  bootstrap: [AppComponent],
+})
 export class AppModule {}

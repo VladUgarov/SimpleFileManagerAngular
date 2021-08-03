@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError} from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
 const BASE_API_URL: string = 'http://localhost:3000/api/';
 
 @Injectable()
 export class HttpService {
-
   constructor(private http: HttpClient) { }
 
   get(url: string): Observable<any> {
@@ -14,21 +13,21 @@ export class HttpService {
   }
 
   post(url: string, fileName: string, fileContent: string = ''): Observable<any> {
-    switch (url){
+    switch (url) {
       case 'createFile':
         return this.http.post(BASE_API_URL + url, { fileName });
-        break
+        break;
       case 'deleteFile':
         return this.http.post(BASE_API_URL + url, { fileName });
-        break
+        break;
       case 'readFile':
         return this.http.post(BASE_API_URL + url, { fileName });
-        break
+        break;
       case 'updateFile':
         return this.http.post(BASE_API_URL + url, { fileName, fileContent });
-        break
+        break;
       default:
         return throwError('Ошибка в запросе');
-      }
     }
+  }
 }
