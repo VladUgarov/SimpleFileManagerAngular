@@ -7,8 +7,6 @@ import { BehaviorSubject } from 'rxjs';
 export class NotificationService {
   public notification$: BehaviorSubject<string> = new BehaviorSubject('');
 
-  constructor() { }
-
   public clearNotification() {
     setTimeout(() => {
       this.notification$.next('');
