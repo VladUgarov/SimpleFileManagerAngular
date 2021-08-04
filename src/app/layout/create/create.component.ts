@@ -28,16 +28,18 @@ export class CreateComponent implements OnDestroy, OnInit {
 
   public createFile(): void {
     const formData = { ...this.createFileForm.value };
-    this.httpService.post('createFile', formData.createFileName).pipe(takeUntil(this.destroyStream$)).subscribe((data: any) => {
-      this.notificationService.notification$.next(`Файл с наименованием ${data} создан`);
-      this.changeDetector.detectChanges();
-      this.notificationService.clearNotification();
-    });
+    this.httpService.post('createFile', formData.createFileName)
+      .pipe(takeUntil(this.destroyStream$)).subscribe((data: any) => {
+        this.changeDetector.detectChanges();
+        this.notificationService.notification$.next(`Файл с наименованием ${data} создан`);
+        this.notificationService.clearNotification();
+      });
 
-    this.fileService.getFilesLists().pipe(takeUntil(this.destroyStream$)).subscribe((data: string) => {
-      this.fileService.filesList$.next(data);
-      this.changeDetector.detectChanges();
-    });
+    this.fileService.getFilesLists()
+      .pipe(takeUntil(this.destroyStream$)).subscribe((data: string) => {
+        this.changeDetector.detectChanges();
+        this.fileService.filesList$.next(data);
+      });
   }
 
   private initForms(): void {

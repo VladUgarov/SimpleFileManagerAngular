@@ -30,12 +30,13 @@ export class UpdateComponent implements OnDestroy, OnInit {
 
   public readFile(): void {
     const formData = { ...this.updateFileForm.value };
-    this.httpService.post('readFile', formData.updateFileName).pipe(takeUntil(this.destroyStream$)).subscribe((data: any) => {
-      this.updateFileForm.patchValue({ updateFileNameContent: data.content });
-      this.changeDetector.detectChanges();
-      this.notificationService.notification$.next(`Файл с наименованием ${data.fileName} открыт для чтения и редактирования`);
-      this.notificationService.clearNotification();
-    });
+    this.httpService.post('readFile', formData.updateFileName)
+      .pipe(takeUntil(this.destroyStream$)).subscribe((data: any) => {
+        this.updateFileForm.patchValue({ updateFileNameContent: data.content });
+        this.changeDetector.detectChanges();
+        this.notificationService.notification$.next(`Файл с наименованием ${data.fileName} открыт для чтения и редактирования`);
+        this.notificationService.clearNotification();
+      });
   }
 
   public updateFile(): void {

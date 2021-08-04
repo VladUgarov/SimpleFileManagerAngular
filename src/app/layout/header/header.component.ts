@@ -21,9 +21,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private destroyStream$: Subject<any> = new Subject();
 
   ngOnInit(): void {
-    this.fileService.getFilesLists().pipe(takeUntil(this.destroyStream$)).subscribe((data: any) => {
-      this.fileService.filesList$.next(data);
-    });
+    this.fileService.getFilesLists()
+      .pipe(takeUntil(this.destroyStream$)).subscribe((data: any) => {
+        this.fileService.filesList$.next(data);
+      });
   }
 
   ngOnDestroy() {

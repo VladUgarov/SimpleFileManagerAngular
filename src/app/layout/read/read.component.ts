@@ -26,12 +26,13 @@ export class ReadComponent implements OnDestroy, OnInit {
 
   public readOnlyFile(): void {
     const formData = { ...this.readOnlyFileForm.value };
-    this.httpService.post('readFile', formData.readOnlyFileName).pipe(takeUntil(this.destroyStream$)).subscribe((data: any) => {
-      this.readOnlyFileForm.patchValue({ readOnlyFileNameContent: data.content });
-      this.changeDetector.detectChanges();
-      this.notificationService.notification$.next(`Файл с наименованием ${data.fileName} открыт для чтения`);
-      this.notificationService.clearNotification();
-    });
+    this.httpService.post('readFile', formData.readOnlyFileName)
+      .pipe(takeUntil(this.destroyStream$)).subscribe((data: any) => {
+        this.readOnlyFileForm.patchValue({ readOnlyFileNameContent: data.content });
+        this.notificationService.notification$.next(`Файл с наименованием ${data.fileName} открыт для чтения`);
+        this.changeDetector.detectChanges();
+        this.notificationService.clearNotification();
+      });
   }
 
   private initForms(): void {

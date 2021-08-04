@@ -28,16 +28,18 @@ export class DeleteComponent implements OnDestroy, OnInit {
 
   public deleteFile(): void {
     const formData = { ...this.deleteFileForm.value };
-    this.httpService.post('deleteFile', formData.deleteFileName).pipe(takeUntil(this.destroyStream$)).subscribe((data: any) => {
-      this.notificationService.notification$.next(`Файл с наименованием ${data} удален`);
-      this.changeDetector.detectChanges();
-      this.notificationService.clearNotification();
-    });
+    this.httpService.post('deleteFile', formData.deleteFileName)
+      .pipe(takeUntil(this.destroyStream$)).subscribe((data: any) => {
+        this.changeDetector.detectChanges();
+        this.notificationService.notification$.next(`Файл с наименованием ${data} удален`);
+        this.notificationService.clearNotification();
+      });
 
-    this.fileService.getFilesLists().pipe(takeUntil(this.destroyStream$)).subscribe((data: string) => {
-      this.fileService.filesList$.next(data);
-      this.changeDetector.detectChanges();
-    });
+    this.fileService.getFilesLists()
+      .pipe(takeUntil(this.destroyStream$)).subscribe((data: string) => {
+        this.changeDetector.detectChanges();
+        this.fileService.filesList$.next(data);
+      });
   }
 
   private initForms(): void {
