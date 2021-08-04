@@ -1,8 +1,9 @@
 import {
-  ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy,
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit,
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from '../../services/http.service';
 import { FileService } from '../../services/file.service';
 import { NotificationService } from '../../services/notification.service';
@@ -13,22 +14,21 @@ import { NotificationService } from '../../services/notification.service';
   styleUrls: ['./delete.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DeleteComponent implements OnDestroy {
-  public deleteFileName: string = '';
+export class DeleteComponent implements OnDestroy, OnInit {
+  public deleteFileForm!: FormGroup;
 
   private destroyStream$: Subject<any> = new Subject();
 
-  set fileList(list: string) {
-    this.fileService.filesList$.next(list);
-  }
-
-  constructor(private httpService: HttpService,
+  constructor(
+    private httpService: HttpService,
     private fileService: FileService,
     private notificationService: NotificationService,
-    private changeDetector: ChangeDetectorRef) {}
+    private changeDetector: ChangeDetectorRef,
+  ) {}
 
   public deleteFile(): void {
-    this.httpService.post('deleteFile', this.deleteFileName).pipe(takeUntil(this.destroyStream$)).subscribe((data: any) => {
+    const formData = { ...this.deleteFileForm.value };
+    this.httpService.post('deleteFile', formData.deleteFileName).pipe(takeUntil(this.destroyStream$)).subscribe((data: any) => {
       this.notificationService.notification$.next(`Файл с наименованием ${data} удален`);
       this.changeDetector.detectChanges();
       this.notificationService.clearNotification();
@@ -38,6 +38,16 @@ export class DeleteComponent implements OnDestroy {
       this.fileService.filesList$.next(data);
       this.changeDetector.detectChanges();
     });
+  }
+
+  private initForms(): void {
+    this.deleteFileForm = new FormGroup({
+      deleteFileName: new FormControl('', Validators.required),
+    });
+  }
+
+  ngOnInit(): void {
+    this.initForms();
   }
 
   ngOnDestroy() {

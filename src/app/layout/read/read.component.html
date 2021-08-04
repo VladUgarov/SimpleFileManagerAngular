@@ -1,14 +1,16 @@
-<div class="container">
-  <h2>Read file</h2>
-  <div>
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Введите название файла</mat-label>
-      <input matInput type="text" placeholder="" name='readOnlyFileName' [(ngModel)]="readOnlyFileName">
+<div class='container'>
+  <form [formGroup]='readOnlyFileForm' (ngSubmit)='readOnlyFile()'>
+    <h2>Read file</h2>
+    <div>
+      <mat-form-field class='example-full-width' appearance='fill'>
+        <mat-label>Введите название файла</mat-label>
+        <input matInput type='text' placeholder='' formControlName='readOnlyFileName'>
+      </mat-form-field>
+    </div>
+    <mat-form-field class='example-full-width' appearance='fill'>
+      <textarea matInput placeholder='' formControlName='readOnlyFileNameContent'></textarea>
     </mat-form-field>
-  </div>
-  <mat-form-field class="example-full-width" appearance="fill">
-    <textarea matInput disabled placeholder="" [value]="readOnlyFileNameContent"></textarea>
-  </mat-form-field>
-  <button mat-raised-button color="warn" (click)="readOnlyFile()">Прочитать файл</button>
+    <button mat-raised-button color='warn' type='submit' [disabled]='readOnlyFileForm.invalid'>Прочитать файл</button>
+  </form>
 </div>
 

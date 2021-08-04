@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReadComponent } from './read.component';
 
 const routes: Routes = [{ path: '', component: ReadComponent }];
@@ -18,6 +18,7 @@ const routes: Routes = [{ path: '', component: ReadComponent }];
     MatButtonModule,
     MatInputModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
   ],
   exports: [RouterModule],

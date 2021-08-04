@@ -1,8 +1,10 @@
-<div class="container">
-  <h2>Create file</h2>
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Введите название файла</mat-label>
-    <input matInput type="text"  placeholder="" name='createFileName' [(ngModel)]="createFileName">
-  </mat-form-field>
-  <button mat-raised-button color="warn" (click)="createFile()">Создать файл</button>
+<div class='container'>
+  <form [formGroup]='createFileForm' (ngSubmit)='createFile()'>
+    <h2>Create file</h2>
+    <mat-form-field class='example-full-width' appearance='fill'>
+      <mat-label>Введите название файла</mat-label>
+      <input matInput type='text' placeholder='' formControlName='createFileName'>
+    </mat-form-field>
+    <button mat-raised-button color='warn' type='submit' [disabled]='createFileForm.invalid' >Создать файл</button>
+  </form>
 </div>

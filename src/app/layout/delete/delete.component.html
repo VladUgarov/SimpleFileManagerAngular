@@ -1,8 +1,10 @@
-<div class="container">
-  <h2>Delete file</h2>
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Введите название файла</mat-label>
-    <input matInput type="text" placeholder="" name='deleteFileName' [(ngModel)]="deleteFileName">
-  </mat-form-field>
-  <button mat-raised-button color="warn" (click)="deleteFile()">Удалить файл</button>
+<div class='container'>
+  <form [formGroup]='deleteFileForm' (ngSubmit)='deleteFile()'>
+    <h2>Delete file</h2>
+    <mat-form-field class='example-full-width' appearance='fill'>
+      <mat-label>Введите название файла</mat-label>
+      <input matInput type='text' placeholder='' formControlName='deleteFileName'>
+    </mat-form-field>
+    <button mat-raised-button color='warn' type='submit' [disabled]='deleteFileForm.invalid'>Удалить файл</button>
+  </form>
 </div>
