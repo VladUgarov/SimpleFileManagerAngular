@@ -1,9 +1,8 @@
 <div class="header">
   <h1>Simple File Manager</h1>
     <div class="fileList" id="serverResponse">Список файлов: {{list$ | async}}</div>
-  <button mat-flat-button type="button" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Главная</button>
-  <button mat-flat-button type="button" routerLink="/create" routerLinkActive="active" >Создать файл</button>
-  <button mat-flat-button type="button" routerLink="/delete" routerLinkActive="active">Удалить файл</button>
-  <button mat-flat-button type="button" routerLink="/read" routerLinkActive="active">Прочитать файл</button>
-  <button mat-flat-button type="button" routerLink="/update" routerLinkActive="active">Обновить файл</button>
+  <button mat-flat-button type="button" (click)="navigateTo(URL_CONST.CREATE)">Создать файл</button>
+  <button mat-flat-button type="button" (click)="navigateTo(URL_CONST.DELETE)">Удалить файл</button>
+  <button mat-flat-button type="button" (click)="navigateTo(URL_CONST.READ)">Прочитать файл</button>
+  <button mat-flat-button type="button" (click)="navigateTo(URL_CONST.UPDATE)">Обновить файл</button>
 </div>
