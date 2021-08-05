@@ -13,7 +13,7 @@
         <textarea matInput placeholder='' formControlName='updateFileNameContent'></textarea>
       </mat-form-field>
     </div>
-    <button mat-raised-button color='warn' type='button' (click)='readFile()'>Прочитать файл</button>
+    <button mat-raised-button color='warn' type='button' (click)='readFile()' [disabled]='updateFileForm.invalid'>Прочитать файл</button>
     <button mat-raised-button color='warn' type='submit' (click)='updateFile()' [disabled]='updateFileForm.invalid'>Обновить файл</button>
   </form>
 </div>

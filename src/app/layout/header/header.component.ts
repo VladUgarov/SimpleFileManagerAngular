@@ -3,7 +3,6 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Router } from '@angular/router';
 import { FileService } from '../../services/file.service';
 
 @Component({
@@ -15,8 +14,9 @@ import { FileService } from '../../services/file.service';
 export class HeaderComponent implements OnInit, OnDestroy {
   public list$ = this.fileService.filesList$;
 
-  constructor(private fileService: FileService,
-    private router: Router) {}
+  constructor(
+    private fileService: FileService,
+  ) {}
 
   private destroyStream$: Subject<any> = new Subject();
 
@@ -30,9 +30,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroyStream$.next();
     this.destroyStream$.complete();
-  }
-
-  navigateTo(url:string) {
-    this.router.navigateByUrl(url);
   }
 }
