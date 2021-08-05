@@ -1,17 +1,19 @@
-<div class="container">
-  <h2>Update file</h2>
-  <div>
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Введите название файла</mat-label>
-      <input matInput type="text" placeholder="" name='readFileName' [(ngModel)]="readFileName">
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label></mat-label>
-      <textarea matInput placeholder="" name='updateFileNameContent' [(ngModel)]="updateFileNameContent"></textarea>
-    </mat-form-field>
-  </div>
-  <button mat-raised-button color="warn" (click)="readFile()">Прочитать файл</button>
-  <button mat-raised-button color="warn" (click)="updateFile()">Обновить файл</button>
+<div class='container'>
+  <form [formGroup]='updateFileForm' (ngSubmit)='updateFile()'>
+    <h2>Update file</h2>
+    <div>
+      <mat-form-field class='example-full-width' appearance='fill'>
+        <mat-label>Введите название файла</mat-label>
+        <input matInput type='text' placeholder='' name='readFileName' formControlName='updateFileName'>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class='example-full-width' appearance='fill'>
+        <mat-label></mat-label>
+        <textarea matInput placeholder='' formControlName='updateFileNameContent'></textarea>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color='warn' type='button' (click)='readFile()' [disabled]='updateFileForm.invalid'>Прочитать файл</button>
+    <button mat-raised-button color='warn' type='submit' (click)='updateFile()' [disabled]='updateFileForm.invalid'>Обновить файл</button>
+  </form>
 </div>

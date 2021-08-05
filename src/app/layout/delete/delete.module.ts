@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeleteComponent } from './delete.component';
 
 const routes: Routes = [{ path: '', component: DeleteComponent }];
@@ -18,6 +18,7 @@ const routes: Routes = [{ path: '', component: DeleteComponent }];
     MatButtonModule,
     MatInputModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
   ],
   exports: [RouterModule],

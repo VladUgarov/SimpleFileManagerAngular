@@ -1,8 +1,9 @@
 import {
-  ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy,
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit,
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from '../../services/http.service';
 import { NotificationService } from '../../services/notification.service';
 
@@ -12,37 +13,54 @@ import { NotificationService } from '../../services/notification.service';
   styleUrls: ['./update.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UpdateComponent implements OnDestroy {
+export class UpdateComponent implements OnDestroy, OnInit {
+  public updateFileForm!: FormGroup;
+
   public readFileName: string = '';
 
   public updateFileNameContent: string = '';
 
   private destroyStream$: Subject<any> = new Subject();
 
-  constructor(private httpService: HttpService,
+  constructor(
+    private httpService: HttpService,
     private notificationService: NotificationService,
-    private changeDetector: ChangeDetectorRef) {
-  }
+    private changeDetector: ChangeDetectorRef,
+  ) {}
 
   public readFile(): void {
-    this.httpService.post('readFile', this.readFileName).pipe(takeUntil(this.destroyStream$)).subscribe((data: any) => {
-      this.updateFileNameContent = data.content;
-      this.changeDetector.detectChanges();
-      this.notificationService.notification$.next(`Файл с наименованием ${data.fileName} открыт для чтения и редактирования`);
-      this.notificationService.clearNotification();
-    });
+    const formData = { ...this.updateFileForm.value };
+    this.httpService.post('readFile', formData.updateFileName)
+      .pipe(takeUntil(this.destroyStream$)).subscribe((data: any) => {
+        this.updateFileForm.patchValue({ updateFileNameContent: data.content });
+        this.changeDetector.detectChanges();
+        this.notificationService.notification$.next(`Файл с наименованием ${data.fileName} открыт для чтения и редактирования`);
+        this.notificationService.clearNotification();
+      });
   }
 
   public updateFile(): void {
-    this.httpService.post('updateFile', this.readFileName, this.updateFileNameContent)
+    const formData = { ...this.updateFileForm.value };
+    this.httpService.post('updateFile', formData.updateFileName, formData.updateFileNameContent)
       .pipe(takeUntil(this.destroyStream$)).subscribe((data: any) => {
-        this.updateFileNameContent = data.content;
+        this.updateFileForm.patchValue({ updateFileNameContent: data.content });
         this.notificationService.notification$.next(`Файл с наименованием ${data.fileName} сохранен`);
         this.notificationService.clearNotification();
       });
   }
 
-  ngOnDestroy() {
+  private initForms(): void {
+    this.updateFileForm = new FormGroup({
+      updateFileName: new FormControl('', Validators.required),
+      updateFileNameContent: new FormControl(''),
+    });
+  }
+
+  ngOnInit(): void {
+    this.initForms();
+  }
+
+  ngOnDestroy(): void {
     this.destroyStream$.next();
     this.destroyStream$.complete();
   }
