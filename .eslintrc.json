@@ -40,8 +40,7 @@
         "arrow-parens": "off",
         "max-len": ["error", { "code": 150 }],
         "linebreak-style": ["error", "windows"],
-        "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }
-        ]
+        "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }]
       }
     },
     {

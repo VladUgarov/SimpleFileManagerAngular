@@ -14,9 +14,10 @@ import { UrlEnum } from '../../enum/url.enum';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  public list$ = this.fileService.filesList$;
   public URL_CONST = { ...UrlEnum };
-  public urlState: UrlEnum;
+  public list$ = this.fileService.filesList$;
+  public urlState: UrlEnum = this.URL_CONST.CREATE;
+  public warn = 'warn'
 
   constructor(
     private fileService: FileService,

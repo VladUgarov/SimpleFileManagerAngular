@@ -1,8 +1,8 @@
 <div class="header">
   <h1>Simple File Manager</h1>
     <div class="fileList" id="serverResponse">Список файлов: {{list$ | async}}</div>
-  <button mat-flat-button type="button" (click)="navigateTo(URL_CONST.CREATE)">Создать файл</button>
-  <button mat-flat-button type="button" (click)="navigateTo(URL_CONST.DELETE)">Удалить файл</button>
-  <button mat-flat-button type="button" (click)="navigateTo(URL_CONST.READ)">Прочитать файл</button>
-  <button mat-flat-button type="button" (click)="navigateTo(URL_CONST.UPDATE)">Обновить файл</button>
+  <button mat-raised-button type="button" [color]="urlState === URL_CONST.CREATE? warn: null" (click)="navigateTo(URL_CONST.CREATE)">Создать файл</button>
+  <button mat-raised-button type="button" [color]="urlState === URL_CONST.DELETE? warn: null" (click)="navigateTo(URL_CONST.DELETE)">Удалить файл</button>
+  <button mat-raised-button type="button" [color]="urlState === URL_CONST.READ? warn: null" (click)="navigateTo(URL_CONST.READ)">Прочитать файл</button>
+  <button mat-raised-button type="button" [color]="urlState === URL_CONST.UPDATE? warn: null" (click)="navigateTo(URL_CONST.UPDATE)">Обновить файл</button>
 </div>
