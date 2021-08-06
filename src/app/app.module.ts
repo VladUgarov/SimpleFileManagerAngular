@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { HttpService } from './services/http.service';
 import { HeaderComponent } from './layout/header/header.component';
 import { AppRoutingModule } from './app-routing.module';
-import {CreateModule} from "./layout/create/create.module";
+import { CreateModule } from './layout/create/create.module';
 
 @NgModule({
   declarations: [

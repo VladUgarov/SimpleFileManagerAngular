@@ -17,7 +17,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public URL_CONST = { ...UrlEnum };
   public list$ = this.fileService.filesList$;
   public urlState: UrlEnum = this.URL_CONST.CREATE;
-  public warn = 'warn'
 
   constructor(
     private fileService: FileService,
